@@ -3,7 +3,8 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  apiUrl: window["env" as any]["apiUrl" as any] || "https://my-json-server.typicode.com/binalVekariya1/json-server",
 };
 
 /*
