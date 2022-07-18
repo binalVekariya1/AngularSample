@@ -1,0 +1,60 @@
+
+
+<mat-toolbar color="primary">
+  <span class="nav-tool-items">
+    Angular Sample
+  </span>
+</mat-toolbar>
+
+<div class="container">
+  <div class="login-container" fxLayout="row">
+    <mat-card rufid="cardlogin">
+      <mat-card-title color="primary">Login</mat-card-title>
+      <mat-card-content>
+        <form [formGroup]="loginForm" (ngSubmit)="login()">
+
+
+          <div fxLayout="column" fxLayoutAlign="start" fxLayout.gt-sm="row" fxLayoutGap="16px"
+            fxLayoutAlign.gt-sm="start  start">
+            <div fxFlex=100>
+              <mat-form-field appearance="outline">
+                <mat-label for="username">UserName</mat-label>
+                <input matInput placeholder="UserName" id="username" type="text" [formControlName]="'username'">
+                <mat-error *ngIf="loginForm.get('username')?.hasError('required')">
+                  Username is a required
+                </mat-error>
+                <mat-error *ngIf="loginForm.get('username')?.hasError('minlength')">
+                  Username must be at least 4 characters long.
+                </mat-error>
+              </mat-form-field>
+
+            </div>
+          </div>
+
+          <div fxLayout="column" fxLayoutAlign="start" fxLayout.gt-sm="row" fxLayoutGap="16px"
+            fxLayoutAlign.gt-sm="start  start">
+            <div fxFlex=100>
+              <mat-form-field appearance="outline">
+                <mat-label for="password">Password</mat-label>
+                <input matInput placeholder="Password" id="password" type="password" [formControlName]="'password'">
+                <mat-error *ngIf="loginForm.get('password')?.hasError('required')">
+                  Password is a required
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+
+
+          <div fxLayout="column" fxLayoutAlign="start" fxLayout.gt-sm="row" fxLayoutGap="16px"
+            fxLayoutAlign.gt-sm="start  start">
+            <div fxFlex=100>
+              <button type="submit" mat-raised-button color="primary">Login</button>
+            </div>
+          </div>
+
+        </form>
+      </mat-card-content>
+    </mat-card>
+
+  </div>
+</div>

@@ -1,0 +1,26 @@
+<mat-toolbar color="primary">
+  <span class="nav-tool-items">
+    <mat-icon (click)="sidenav.toggle()" aria-label="Main menu" class="hamburger">menu</mat-icon>
+    Angular Training
+  </span>
+  <span class="spacer"></span>
+  <button type="button" (click)="logout()" mat-button aria-label="Logout">Logout </button>
+
+</mat-toolbar>
+
+<mat-sidenav-container>
+  <!-- Sidenav -->
+  <mat-sidenav autosize #sidenav opened="false" [fixedInViewport]="true" [fixedTopGap]>
+    <mat-nav-list>
+      <a mat-list-item *ngFor="let link of navLinks" (click)="sidenav.toggle()" [routerLink]="link.link"
+        routerLinkActive #rla="routerLinkActive">
+        <mat-icon>{{link.icon}}</mat-icon>{{link.label}}
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <!-- Main content -->
+  <mat-sidenav-content>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
