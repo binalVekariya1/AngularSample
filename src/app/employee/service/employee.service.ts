@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { Observable, of, ReplaySubject, Subject } from 'rxjs';
+import { Observable, of } from 'rxjs';
+import { first } from 'rxjs/operators'
 import { Environment } from 'src/app/shared/model/environment.model';
 import { ENVIRONMENT } from 'src/app/shared/model/environment.token';
 import { Employee } from '../model/employee.model';
@@ -23,17 +24,27 @@ export class EmployeeService {
   }
 
   getAll(): Observable<Employee[]> {
-     return of(this._employeeList);
+    return of(this._employeeList);
   }
 
-  post(employee: Employee) {
+  getById(code: number): Observable<Employee | Employee[]> {
+    return of(this._employeeList.filter(e => e.code == code)[0]);
+  }
+
+
+  post(employee: Employee): Observable<boolean> {
     const maxCode = Math.max(...this._employeeList.map(o => o.code));
-    employee.code = maxCode+1;
+    employee.code = maxCode + 1;
     this._employeeList.push(employee);
+    return of(true);//TODO:BINAL Based on http request set true false
   }
 
-  patch(employee: Employee) {
+  patch(employee: Employee): Observable<boolean> {
+    const index = this._employeeList.findIndex(e => e.code == employee.code);
+    this._employeeList[index].name = employee.name;
+    this._employeeList[index].email = employee.email;
 
+    return of(true);//TODO:BINAL Based on http request set true false
   }
 
   delete(code: number) {
